@@ -1,0 +1,45 @@
+.formst {
+  width: 30%;
+  border: 2px solid black;
+  height: 450px;
+  padding: 10px;
+  background-color: white;
+  /* margin-top: 50px; */
+  font-size: 30px;
+}
+.inp{
+  text-align: justify;
+}
+input {
+  height: 30px;
+  width: 60%;
+}
+table {
+  border: 2px solid black;
+  width: 30%;
+  border-collapse: collapse;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+tr {
+  height: 30px;
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+#row{
+  height: 40px;
+  background-color: rgb(228, 245, 241);
+}
+#row th{
+  font-weight: 700;
+}
+#sub {
+  background-color: rgb(127, 146, 74);
+  font-size: 20px;
+  height: 35px;
+  width: 30%;
+  font-weight: bold;
+  color: whitesmoke;
+}

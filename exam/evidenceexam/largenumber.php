@@ -10,6 +10,7 @@
      <form action="<?php 
             $_SERVER['PHP_SELF']
     ?>" method="post" class="formstyle">
+            <h1>Largest Number</h1>
             <input type="text" name="fnum" id="">
             <br><br>
             <input type="text" name="snum" id=""><br><br>

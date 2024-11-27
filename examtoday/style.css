@@ -1,0 +1,48 @@
+.formstyle {
+  width: 30%;
+  border: 2px solid black;
+  height: 250px;
+  padding: 30px;
+  background-color: gainsboro;
+}
+input {
+  width: 50%;
+  height: 40px;
+  color: white;
+  background-color: gray;
+  border: 2px solid black;
+}
+#sub {
+  font-weight: bold;
+  font-size: 16px;
+  width: 20%;
+}
+
+.result {
+  margin-top: 40px;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 50px;
+  border: 2px rgb(148, 126, 123);
+  background-color: rgb(146, 108, 137);
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+table {
+  border: 2px solid black;
+  width: 30%;
+  border-collapse: collapse;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+tr {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}

@@ -20,23 +20,28 @@
                 $students=file("storing.txt");
                 echo "<table>
                              <tr> 
-                                <td>
-                                     NAME     ||      ID      ||        BATCH
-                                </td>    
+                                <th>
+                                     NAME 
+                                </th> 
+                                <th>ID</th>
+                                <th>Batch</th>   
                              </tr>
                        
-                    </table>";
+                    ";
                 foreach($students as $student){
                         list($name,$id,$batch)=explode(";",trim($student));
-                            echo "<table>
-                                    <tr>
-                                        <td>
-                                            $name      ||    $id       ||        $batch
-                                        </td>
-                                    </tr>
-                            </table>";
-                        
-                }
+                            echo "
+                                    <tr> 
+                                <th>
+                                    $name
+                                </th> 
+                                <th>$id</th>
+                                <th>$batch</th>   
+                             </tr>";
+
+                             
+                            }
+                            echo "</table>";
                 
             }
         }

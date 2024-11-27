@@ -1,0 +1,29 @@
+.formst {
+  width: 30%;
+  border: 2px solid black;
+  height: 300px;
+  padding: 10px;
+  background-color: gainsboro;
+  margin-top: 50px;
+  font-size: 30px;
+}
+input{
+    height: 20px;
+    width: 60%;
+}
+table {
+  border: 2px solid black;
+  width: 30%;
+  border-collapse: collapse;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+tr {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+#sub{
+    background-color: antiquewhite;
+}
