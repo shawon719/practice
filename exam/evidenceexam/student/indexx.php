@@ -40,7 +40,7 @@ if(isset($_POST["btn"])){
         </form>
 
         <?php
-            Student::printResult();
+            Student::showResult();
         ?>
 </body>
 </html>

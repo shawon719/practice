@@ -16,7 +16,7 @@
             function st(){
                 return $this->name.";".$this->id.";".$this->batch.PHP_EOL;
             }
-            static function printResult(){
+            static function showResult(){
                 // $students=file("storing.txt");
                 // echo "<table>
                 //              <tr> 
