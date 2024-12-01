@@ -4,12 +4,18 @@
          $username=$_POST["txtusername"];
          $password=$_POST["txtpassword"];
          $email=$_POST["txtemail"];
+         $a="/^[a-zA-Z0-9]+@+\.[a-zA-Z]{2,}$/";
+         if(preg_match($a,$email)){
+            echo "email valid.";
+         }else{
+            echo "not valid.";
+         }
         if($username=="shawon" && $password=="123"){
             $_SESSION["sname"]=$username;
-             header("location:demoinformation.php");
+             header("location:demo.php");
         }
         else{
-            $msg="username and password are incorrect!!!!!!!!!!";
+            $m="username and password are incorrect!!!!!!!!!!";
         }
     }
 ?>
@@ -23,22 +29,22 @@
 <body>
 
         <?php 
-                echo isset($msg)?$msg:" ";
+                echo isset($m)?$m:" ";
         ?>
     <form action="#" method="post">
         <h1>this is first page</h1>
         <table>
             <tr>
                 <th><label for="">User Name:</label></th>
-                <th><input type="text" name="txtusername" id="" required></th> 
+                <th><input type="text" name="txtusername" id="" ></th> 
             </tr>
             <tr>
                 <th>Password:</th>
-                <th><input type="text" name="txtpassword" id="" required></th>
+                <th><input type="text" name="txtpassword" id="" ></th>
             </tr>
             <tr>
                 <th>Email:</th>
-                <th><input type="email" name="txtemail" required></th>
+                <th><input type="email" name="txtemail" ></th>
             </tr>
         </table>
             <input type="submit" name="btn"  value="Log in" id="">

@@ -35,6 +35,8 @@
         <input type="text" name="txtid" id=""><br><br>
         phone:
         <input type="text" name="txtphone" id=""><br><br>
+        Email:
+        <input type="email" name="txtemail" id="">
         <input type="submit" name="btn" id="" value="submit">
     </form>
 </body>
