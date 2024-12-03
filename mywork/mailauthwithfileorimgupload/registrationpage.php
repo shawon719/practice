@@ -5,7 +5,7 @@ session_start();
 // Check if the user is logged in, else redirect to login.php
 if (!isset($_SESSION["sname"])) {
     header("location: login.php");
-    exit(); // Ensure no further code is executed
+    //exit(); // Ensure no further code is executed
 }
 ?>
 

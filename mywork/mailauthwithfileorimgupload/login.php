@@ -7,7 +7,7 @@
         $password=$_POST["pafield"];
         if($username=="shawon" && $password=="shawon2001"){
             $_SESSION["sname"]=$username;
-            header("location: demopage.php");
+            header("location: registrationpage.php");
         }else{
             $m="username and password are incorrect";
         }
