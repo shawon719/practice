@@ -2,19 +2,20 @@
     if (isset($_POST["btnSubmit"])) {
         $filename = $_FILES["my_file"]["name"];
         $temp_file = $_FILES["my_file"]["tmp_name"];
-        var_dump($filename);
         $size=$_FILES["my_file"]["size"];
-        $type=$_FILES["my-file"]["type"];
-
-        // The directory where the file will be saved
+        $type=$_FILES["my_file"]["type"];
         $img = "image/";
+        //   var_dump($filename);
+        // The directory where the file will be saved
+        
 
         $kb=$size/1024;
 
-        if($kb>500 && $type=="png"){
-            move_uploaded_file("$temp_file","$img.$filename");
+        if($kb<500 && $type=="jpg"){
+            
             echo "successful";
         }else{
+            move_uploaded_file($temp_file, $img . $filename);
             echo "size is less than 500";
         }
 
@@ -52,7 +53,7 @@
         // After the form is submitted, display the uploaded image
         if (isset($_POST["btnSubmit"])) { // && !empty($filename)
             //echo "<img src='" . $img . basename($filename) . "' alt='Uploaded Image' width='300px'>";
-            echo "<img src='$img.$filename' alt='dajf' width='500px'>";
+            echo "<img src='$img$filename' alt='Uploaded Image' width='500px'>";
         }
     ?>
 </body>

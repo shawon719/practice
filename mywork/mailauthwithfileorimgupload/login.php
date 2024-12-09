@@ -9,7 +9,7 @@
             $_SESSION["sname"]=$username;
             header("location: registrationpage.php");
         }else{
-            $m="username and password are incorrect";
+            $m="username and password are incorrect!";
         }
     }
 ?>
