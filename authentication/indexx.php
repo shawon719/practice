@@ -1,16 +1,23 @@
 <?php 
     session_start();
     if(isset($_POST["btn"])){
-         $username=$_POST["txtusername"];
+         $name=$_POST["txtusername"];
          $password=$_POST["txtpassword"];
          $email=$_POST["txtemail"];
-        if($username=="shawon" && $password=="123"){
-            $_SESSION["sname"]=$username;
+
+         $file=file("logindata.txt");
+         foreach($file as $singledata){
+            list($username,$userpassword)=explode(',',trim($singledata));
+
+             if(trim($name) ==$username && trim($password)==$userpassword){
+            $_SESSION["sname"]=$name;
              header("location:demoinformation.php");
         }
         else{
             $msg="username and password are incorrect!!!!!!!!!!";
         }
+         }
+       
     }
 ?>
 <!DOCTYPE html>
@@ -42,6 +49,8 @@
             </tr>
         </table>
             <input type="submit" name="btn"  value="Log in" id="">
+            <a href="#"><input type="submit" name="" value="Sign up
+            " id=""></a>
     </form>
 </body>
 </html>
