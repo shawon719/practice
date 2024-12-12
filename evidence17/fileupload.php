@@ -1,7 +1,30 @@
 <?php
         if(isset($_POST['btn'])){
             $filename=$_FILES['myfile'];
-            var_dump($filename);
+            $tmp=$_FILES['myfile']['tmp_name'];
+            var_dump($tmp);
+            //var_dump($filename);
+
+            // $img="image/";
+            // if(!(empty($filename))){
+            //     if(move_uploaded_file($tmp,$img . $filename)){
+            //         echo "<br>upload successfully.";
+            //     }else{
+            //         echo "there is a problem uploading the file.";
+            //     }
+                
+            // }
+            // else{
+            //     echo "file not found.please select a file.";
+            // }
+            
+            $img="image/";
+       if(!empty($filename)){
+            move_uploaded_file("$tmp","$img.$filename");
+        }
+        else{
+            echo "please select a file.";
+        }
         }
 
 ?>
@@ -20,5 +43,10 @@
              <button name="btn">upload</button>
         </form>
     </div>
+    <?php
+            if(isset($_POST['btn'])){
+                echo "<img src='$img.$filename' alt='screenshot' width='500px'>";
+            }
+    ?>
 </body>
 </html>
