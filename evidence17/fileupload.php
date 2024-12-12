@@ -1,52 +1,47 @@
 <?php
-        if(isset($_POST['btn'])){
-            $filename=$_FILES['myfile'];
-            $tmp=$_FILES['myfile']['tmp_name'];
-            var_dump($tmp);
-            //var_dump($filename);
+    if(isset($_POST['btn'])){
+        // ফাইল ইনপুট অ্যারে
+        $filename = $_FILES['myfile']['name']; // ফাইলের আসল নাম
+        $tmp = $_FILES['myfile']['tmp_name']; // অস্থায়ী ফাইল পাথ
+        $img = "image/"; // আপলোড ডিরেক্টরি
 
-            // $img="image/";
-            // if(!(empty($filename))){
-            //     if(move_uploaded_file($tmp,$img . $filename)){
-            //         echo "<br>upload successfully.";
-            //     }else{
-            //         echo "there is a problem uploading the file.";
-            //     }
-                
-            // }
-            // else{
-            //     echo "file not found.please select a file.";
-            // }
-            
-            $img="image/";
-       if(!empty($filename)){
-            move_uploaded_file("$tmp","$img.$filename");
-        }
-        else{
-            echo "please select a file.";
-        }
-        }
+        // ফাইলের পাথ তৈরি করা
+        $target_file = $img . basename($filename);
 
+        // ফাইল না নির্বাচন করা হলে
+        if(empty($filename)){
+            echo "Please select a file.";
+        } else {
+            // ফাইলটি আপলোড করা
+            if(move_uploaded_file($tmp, $target_file)){
+                echo "<br>Upload successfully.";
+            } else {
+                echo "There was a problem uploading the file.";
+            }
+        }
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>file and image upload</title>
+    <title>File and Image Upload</title>
 </head>
 <body>
     <div class="formm">
         <form action="#" method="post" enctype="multipart/form-data">
             <input type="file" name="myfile">
-            <!-- <input type="submit" name="btn" val> -->
-             <button name="btn">upload</button>
+            <button type="submit" name="btn">Upload</button>
         </form>
     </div>
+
     <?php
-            if(isset($_POST['btn'])){
-                echo "<img src='$img.$filename' alt='screenshot' width='500px'>";
-            }
+        // ফাইল আপলোড হলে তার প্রিভিউ দেখানো
+        if(isset($_POST['btn']) && !empty($filename)){
+            echo "<br><img src='$img$filename' alt='Uploaded Image' width='500px'>";
+        }
     ?>
 </body>
 </html>
