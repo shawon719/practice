@@ -1,8 +1,10 @@
 <?php
     if(isset($_POST['btn'])){
         $file=$_FILES['myFile'];
-
+        $tmp=$_FILES['myFile']['tmp_name'];
         var_dump($file);
+
+        $img="image/";
     }
 ?>
 <!DOCTYPE html>
