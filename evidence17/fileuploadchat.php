@@ -36,10 +36,10 @@
     
     <?php
         // ফাইল আপলোড সফল হলে ইমেজ দেখানোর জন্য
-        if(isset($_POST["btnSubmit"]) && !empty($filename)){
-            // ইমেজটি সঠিকভাবে প্রদর্শন করার জন্য সঠিক পাথ ব্যবহার
-            echo "<img src='$img$filename' alt='uploaded image' width='300px'>";
-        }
+        // if(isset($_POST["btnSubmit"]) && !empty($filename)){
+        //     // ইমেজটি সঠিকভাবে প্রদর্শন করার জন্য সঠিক পাথ ব্যবহার
+        //     echo "<img src='$img$filename' alt='uploaded image' width='300px'>";
+        // }
     ?>
 </body>
 </html>
