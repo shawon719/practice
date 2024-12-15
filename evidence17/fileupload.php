@@ -1,3 +1,10 @@
+<?php
+    if(isset($_POST['btn'])){
+        $file=$_FILES['myFile'];
+
+        var_dump($file);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
