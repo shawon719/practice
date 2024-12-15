@@ -1,5 +1,11 @@
 <?php
-    
+    if(isset($_POST["btnSubmit"])){
+        $filename=$_FILES["filen"];
+        $temp_file = $_FILES["filen"]["tmp_name"];
+        var_dump($filename);
+        echo "<br>";
+        var_dump($temp_file);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
