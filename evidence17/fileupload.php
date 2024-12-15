@@ -1,12 +1,12 @@
 <?php
     if(isset($_POST['btn'])){
-        $file=$_FILES['myFile'];
+        $filename=$_FILES['myFile'];
         $tmp=$_FILES['myFile']['tmp_name'];
-        var_dump($file);
+        var_dump($filename);
 
         $img="image/";
-        if(!empty($file)){
-            move_uploaded_file($tmp,$img.$file);
+        if(!empty($filename)){
+            move_uploaded_file($tmp,$img.$filename);
             echo "successful.";
         }
         else{
@@ -31,7 +31,7 @@
      </section>
      <?php
             if(isset($_POST['btn'])){
-                echo "<img src='$img.$file' alt='image not found' title='image'>";
+                echo "<img src='$img.$filename' alt='image not found' title='image'>";
             }
      ?>
 </body>
