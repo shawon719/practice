@@ -8,14 +8,14 @@
          if(preg_match($a,$email)){
             echo "email valid.";
          }else{
-            echo "not valid.";
+            echo "email not valid.<br>";
          }
-        if($username=="shawon" && $password=="123"){
+        if($username=="shawon" && $password=="123" && $email="$a"){
             $_SESSION["sname"]=$username;
              header("location:demo.php");
         }
         else{
-            $m="username and password are incorrect!!!!!!!!!!";
+            $m="username,password  & email are incorrect!!!!!!!!!!";
         }
     }
 ?>
@@ -36,15 +36,15 @@
         <table>
             <tr>
                 <th><label for="">User Name:</label></th>
-                <th><input type="text" name="txtusername" id="" ></th> 
+                <th><input type="text" name="txtusername" id="" required></th> 
             </tr>
             <tr>
                 <th>Password:</th>
-                <th><input type="text" name="txtpassword" id="" ></th>
+                <th><input type="text" name="txtpassword" id="" required></th>
             </tr>
             <tr>
                 <th>Email:</th>
-                <th><input type="email" name="txtemail" ></th>
+                <th><input type="text" name="txtemail" required></th>
             </tr>
         </table>
             <input type="submit" name="btn"  value="Log in" id="">

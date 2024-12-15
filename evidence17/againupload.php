@@ -1,10 +1,11 @@
 <?php
     if(isset($_POST["btnSubmit"])){
-        $filename=$_FILES["fileName"];
+        $filename=$_FILES['fileName'];
+        //$filename=$_FILES["fileName"]['name'];
         $temp_file = $_FILES["fileName"]["tmp_name"];
-        //var_dump($filename);
-        //echo "<br>";
-        //var_dump($temp_file);
+        var_dump($filename);
+        echo "<br>";
+        var_dump($temp_file);
 
         $img="image/";
             if(!empty($filename)){
