@@ -5,6 +5,13 @@
         var_dump($file);
 
         $img="image/";
+        if(!empty($file)){
+            move_uploaded_file($tmp,$img.$file);
+            echo "successful.";
+        }
+        else{
+            echo "file hasn't choosen yet.";
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -22,5 +29,10 @@
                 <button name="btn">choose file</button>
         </form>
      </section>
+     <?php
+            if(isset($_POST['btn'])){
+                echo "<img src='$img.$file' alt='image not found' title='image'>";
+            }
+     ?>
 </body>
 </html>
