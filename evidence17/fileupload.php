@@ -1,6 +1,6 @@
 <?php
     if(isset($_POST['btn'])){
-        $filename=$_FILES['myFile'];
+        $filename=$_FILES['myFile']['name'];
         $temp_file=$_FILES['myFile']['tmp_name'];
         //var_dump($filename);
 
@@ -27,7 +27,7 @@
 </head>
 <body>
      <section>
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="#" method="post" enctype="multipart/form-data">
                 <h3>file upload</h3>
                 <input type="file" name="myFile">
                 <button name="btn">choose file</button>
@@ -35,10 +35,10 @@
      </section>
      <?php
            // ফাইল আপলোড সফল হলে ইমেজ দেখানোর জন্য
-        if(isset($_POST["btnSubmit"]) && !empty($filename)){
-            // ইমেজটি সঠিকভাবে প্রদর্শন করার জন্য সঠিক পাথ ব্যবহার
+         if(isset($_POST["btn"]) && (!empty($filename))){
+        //     // ইমেজটি সঠিকভাবে প্রদর্শন করার জন্য সঠিক পাথ ব্যবহার
             echo "<img src='$img$filename' alt='uploaded image' width='300px'>";
-        }
-     ?>
+         }
+     ?> 
 </body>
 </html>
