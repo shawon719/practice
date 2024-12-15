@@ -2,7 +2,7 @@
     if(isset($_POST['btn'])){
         $filename=$_FILES['myFile'];
         $temp_file=$_FILES['myFile']['tmp_name'];
-        var_dump($filename);
+        //var_dump($filename);
 
         $img="image/";
          if(!empty($filename)){
