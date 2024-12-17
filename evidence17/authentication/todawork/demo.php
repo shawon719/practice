@@ -27,7 +27,7 @@ if(isset($_FILES["myFile"])){
                 // Error message if the upload fails
                 $errorMessage = "there is a problem to upload the file";
             }
-            $errorMessage = "image file must less than 1000 kb";
+            $errorMessage = "image file must more than 1000 kb";
         } 
         else if(glob($imgs . "*.{jpg,jpeg,png,gif}", GLOB_BRACE)){
             // Try to move the uploaded file
