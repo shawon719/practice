@@ -1,3 +1,33 @@
+<?php
+            session_start();
+
+        if(isset($_POST["logbtn"])){
+            $username=$_POST["uname"];
+            $password=$_POST["pname"];
+            $email=$_POST["ename"];
+
+            $a='/^[a-zA-Z0-9._%$+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3,4}$/';
+            //validate name and show error if name are not correct
+            if($name != "sharmony"){
+                $usernameerror="Incorrect user name.";
+            }
+            //validate password and show error if password are not correct
+            if($password != "123"){
+                $passworderror="Incorrect password.";
+            }
+            //validate email and show if email are not correct
+            if(!preg_match($a,$email)){
+                $emailerror="please enter valid email.";
+            }
+            // Check if all fields are valid and redirect to the demo page
+            if($username == "sharmony" && $password == "123" && (preg_match($a,$email))){
+                    $_SESSION["shname"]=$username;
+                    header("location:demo.php");
+                    
+            }
+        }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
