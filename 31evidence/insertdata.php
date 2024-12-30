@@ -20,6 +20,15 @@
         }else{
             //echo "not added.";
         }
+
+
+        //trigger part
+
+        if(isset($_POST["dltManu"])){
+            $dlt=$_POST["delma"];
+            $db->query("delete from manufacturer where id= $dlt "); 
+        }
+
 ?>
 
 <!DOCTYPE html>
@@ -36,9 +45,7 @@
             <table border="1" style="border-collapse:collapse">
                 <thead>
                     <tr>
-                        <th>Manufacture Name
-
-                        </th>
+                        <th>Manufacture Name</th>
                         <th>Address<br></th>
                         <th>Contact Number<br></th>
                     </tr>
@@ -53,17 +60,23 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3" style="text-align:center"><button name="maSub">Add into Manufacture</button></td>
+                        <td colspan="3" style="text-align:center"><button name="maSub">Add into Manufacture</button>
+
+                        <button>
+                                <?php
+                                    if(isset($_POST["maSub"])){
+                                                echo "added.";
+                                    }else{
+                                        echo "not added.";
+                                    }        
+                                ?>
+                        </button>
+                    
+                    </td>
                         
                     </tr>
                 </tfoot>
-                <?php
-                    if(isset($_POST["maSub"])){
-                                echo "added.";
-                    }else{
-                        echo "not added.";
-                    }        
-                ?>
+                
             </table>
         </form>
     </section> 
@@ -76,7 +89,8 @@
                     <tr>
                         <th>Product Name</th>
                         <th>Price<br></th>
-                        <th>Manufacture Name<br></th>
+                        <th>Manufacture Name<br></th> 
+                        <th>Manufacture delete</th> 
                     </tr>
                    
                 </thead>
@@ -94,22 +108,93 @@
                                 ?>
                             </select>
                         </td>
+
+                        <td>
+                            <select name="delma" id="">
+                                <?php
+                                    $manuName=$db->query("select * from manufacturer");
+                                     while(list($_mid,$_mNm)=$manuName->fetch_row()){
+                                        echo "<option value='$_mid'>$_mNm</option>";
+                                    }       
+                                ?>
+                            </select>
+                        </td>
                     </tr>
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <td colspan="3" style="text-align:center"><button name="proSub">Add into Manufacture</button></td>
-                        
-                    </tr>
-                </tfoot>
-                <?php
+                    <tr >
+                        <td colspan="3" style="text-align:center"><button name="proSub">Add into product</button>
+                                    <button>
+                                        <?php
                     if(isset($_POST["proSub"])){
                                 echo "added.";
                     }else{
                         echo "not added.";
                     }  
                 ?>     
+                                    </button>
+                    </td>
+                        <td  style="text-align:center"><button name="dltManu">delete Manufacture</button>
+                               <button><?php
+                                    if(isset($_POST["dltManu"])){
+                                                echo "deleted.";
+                                    }else{
+                                        echo "not deleted.";
+                                    }        
+                            ?> </button>
+                    </td>
+                        
+                    </tr>
+                     
+                </tfoot>
+                <?php
+                    // if(isset($_POST["proSub"])){
+                    //             echo "added.";
+                    // }else{
+                    //     echo "not added.";
+                    // }  
+                ?>     
             </table>
+        </form>
+
+        <form action="" method="post">
+            <!-- <h1>delete</h1> -->
+
+            <table border="1" style="border-collapse:collapse">
+                    <thead>
+                        <!-- <tr>
+                            <th>Manufacture delete</th>  
+                        </tr> -->
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <!-- <td>
+                                <select name="delma" id="">
+                                <?php
+                                    // $manuName=$db->query("select * from manufacturer");
+                                    //  while(list($_mid,$_mNm)=$manuName->fetch_row()){
+                                    //     echo "<option value='$_mid'>$_mNm</option>";
+                                    // }       
+                                ?>
+                            </select>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <!-- <tr>
+                            <td colspan="3" style="text-align:center"><button name="dltManu">delete Manufacture</button></td>
+                            
+                        </tr> -->
+                    </tfoot>
+                    <?php
+                        // if(isset($_POST["dltManu"])){
+                        //             echo "deleted.";
+                        // }else{
+                        //     echo "not deleted.";
+                        // }        
+                    ?> 
+                </table>
+
         </form>
     </section>
 
