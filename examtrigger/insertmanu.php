@@ -5,6 +5,13 @@
         $address=$_POST["adNAME"];
         $contact=$_POST["coNAME"];
          $connect->query("call addm('$mname','$address','$contact')");
+
+         if(isset($_POST["add"])){
+            $pname=$_POST["pn"];
+            $price=$_POST["pp"];
+            $manuadd=$_POST["manufactureadd"];
+            $connect->query("call addp('$pname','$price','$manuadd')");
+         }
 }
 ?>
 
@@ -14,7 +21,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>insert manufacture</title>
-    <style>
+    <!-- <style>
         /* Apply a soft pastel color background to the body */
 body {
     background-color: #f8f0f6;
@@ -120,7 +127,7 @@ form {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-    </style>
+    </style> -->
 </head>
 <body>
         <h1>this is manufacture table</h1>
@@ -176,17 +183,114 @@ form {
                             <td><input type="text" name="pn" id=""></td>
                             <td><input type="text" name="pp" id=""></td>
                             <td>
-                                <select name="manufacturen" id="">
+                                <select name="manufactureadd" id="">
                                     <?php
-                                        $product=
+                                        $product=$connect->query("select * from manufacturer");
+                                        while(list($_mid,$_mname)=$product->fetch_row()){
+                                            echo "<option value='$_mid'>$_mname</option>";
+                                        }
                                     ?>
                                 </select>
                             </td>
-                            
+                            <td>
+                                <select name="manufacturedlt" id="">
+                                    <?php
+                                        $product=$connect->query("select * from manufacturer");
+                                        while(list($_mid,$_mname)=$product->fetch_row()){
+                                            echo "<option value='$_mid'>$_mname</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </td>    
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" style="text-align:center">
+                                <button name="add">Add product</button>
+                                        <?php
+                                        if(isset($_POST["add"])){
+                                            echo "data added";
+                                        }else{
+                                            echo "data not added.";
+                                        }
+                                    ?>
+                            </td>
+                            <td>
+                                <button name="dlt">Delete</button>
+                                <?php
+                                        if(isset($_POST['dlt'])){
+                                            echo " data delete.";
+                                        }else{
+                                            echo "data not delete.";
+                                        }
+                                ?>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </form>
+        </section>
+
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Serial</td>
+                        <td>Product Name</td>
+                        <td>Manufacture Name</td>
+                        <td>Office Address</td>
+                        <td>Contact No.</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $product=$connect->query("select * from tablename");
+                        while(list($_id,$_pname,$_price,$_manuname,$_address,$_contact)=$product->fetch_row()){
+                            echo "<tr>
+                                        <td>$_id</td>
+                                        <td>$_pname</td>
+                                        <td>$_price</td>
+                                        <td>$_manuname</td>
+                                        <td>$_address</td>
+                                        <td>$_contact</td>
+
+                            </tr>";
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Serial</td>
+                        <td>Product Name</td>
+                        <td>Manufacture Name</td>
+                        <td>Office Address</td>
+                        <td>Contact No.</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php
+                        $product=$connect->query("select * from ");
+                        while(list($_id,$_pname,$_price,$_manuname,$_address,$_contact)=$product->fetch_row()){
+                            echo "<tr>
+                                        <td>$_id</td>
+                                        <td>$_pname</td>
+                                        <td>$_price</td>
+                                        <td>$_manuname</td>
+                                        <td>$_address</td>
+                                        <td>$_contact</td>
+
+                            </tr>";
+                        }
+                    ?>
+                </tbody>
+        </table>
         </section>
 </body>
 </html>
