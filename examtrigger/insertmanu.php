@@ -1,18 +1,28 @@
 <?php
     include("database.php");
-    if(isset($_POST["addManu"])){
-        $mname=$_POST["maNAME"];
-        $address=$_POST["adNAME"];
-        $contact=$_POST["coNAME"];
-         $connect->query("call addm('$mname','$address','$contact')");
 
-         if(isset($_POST["add"])){
-            $pname=$_POST["pn"];
-            $price=$_POST["pp"];
-            $manuadd=$_POST["manufactureadd"];
-            $connect->query("call addp('$pname','$price','$manuadd')");
-         }
-}
+    // Add Manufacturer
+    if (isset($_POST["addManu"])) {
+        $mname = $_POST["maNAME"];
+        $address = $_POST["adNAME"];
+        $contact = $_POST["coNAME"];
+        $connect->query("CALL addm('$mname', '$address', '$contact')");
+    }
+
+    // Add Product
+    if (isset($_POST["add"])) {
+        $pname = $_POST["pn"];
+        $price = $_POST["pp"];
+       
+        $manuadd = $_POST["manufact"];
+        $connect->query("CALL addp('$pname', '$price','$manuadd')");
+    }
+
+    // Trigger Delete
+    if (isset($_POST["dlt"])) {
+        $dltm = $_POST["manufact"];
+        $connect->query("DELETE FROM manufacturer WHERE id= $dltm");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -20,277 +30,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>insert manufacture</title>
-    <!-- <style>
-        /* Apply a soft pastel color background to the body */
-body {
-    background-color: #f8f0f6;
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
+    <title>Evidence</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff8f8;
+            color: #555;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* Style the title */
-h1 {
-    text-align: center;
-    color: #ff6b6b;
-    font-size: 2em;
-    margin-top: 30px;
-}
+        h1 {
+            color: #ff69b4;
+            font-size: 2.8em;
+            text-align: center;
+            margin-top: 30px;
+            font-family: 'Lobster', sans-serif;
+        }
 
-/* Style the table container */
-table {
-    width: 60%;
-    margin: 30px auto;
-    border-collapse: collapse;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    background-color: #ffffff;
-}
+        /* Section Styles */
+        section {
+            margin: 40px auto;
+            max-width: 1100px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #fceabb, #f8b500);
+            transition: all 0.3s ease;
+        }
 
-/* Style the table header */
-thead {
-    background-color: #ff9ff3;
-}
+        section:hover {
+            transform: translateY(-10px);
+        }
 
-thead td {
-    padding: 15px;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-}
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
 
-/* Style the table rows and inputs */
-tbody td {
-    padding: 10px;
-    text-align: center;
-}
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+        }
 
-input[type="text"] {
-    padding: 10px;
-    width: 80%;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1em;
-    box-sizing: border-box;
-}
+        th {
+            background-color: #ff6f61;
+            color: white;
+            font-weight: bold;
+        }
 
-input[type="text"]:focus {
-    outline: none;
-    border-color: #ff6b6b;
-}
+        td {
+            background-color: #fff4f1;
+            color: #333;
+            border: 1px solid #f1f1f1;
+        }
 
-/* Style the button */
-button {
-    padding: 12px 20px;
-    background-color: #ff6b6b;
-    color: white;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        /* Input and Select Styles */
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ff6f61;
+            border-radius: 10px;
+            font-size: 1.1em;
+            background-color: #fceabb;
+            color: #555;
+            transition: border-color 0.3s ease;
+        }
 
-/* Hover effect on button */
-button:hover {
-    background-color: #ff4d4d;
-}
+        input[type="text"]:focus, select:focus {
+            border-color: #f8b500;
+            outline: none;
+        }
 
-/* Style for the footer (message area) */
-tfoot td {
-    text-align: center;
-    padding: 10px;
-    font-size: 1em;
-    background-color: #f8f0f6;
-}
+        /* Button Styles */
+        button {
+            background-color: #ff6f61;
+            color: #fff;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-/* Message styling */
-tfoot td button {
-    margin-top: 10px;
-}
+        button:hover {
+            background-color: #ff3d2f;
+            transform: translateY(-5px);
+        }
 
-/* Ensure good spacing and a rounded look for the table */
-table, th, td {
-    border-radius: 10px;
-}
+        /* Message Styles */
+        .message, .delete-message {
+            font-size: 1.2em;
+            text-align: center;
+            margin-top: 15px;
+        }
 
-/* Add a subtle shadow to the form */
-form {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+        .message {
+            color: #66bb6a;
+        }
 
-    </style> -->
+        .delete-message {
+            color: #ff1744;
+        }
+
+        /* Form Container Styles */
+        .form-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form-container select {
+            width: 70%;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            font-size: 1.1em;
+            color: #ff6f61;
+            margin-top: 40px;
+            font-family: 'Lobster', sans-serif;
+        }
+
+        footer p {
+            margin-bottom: 20px;
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-        <h1>this is manufacture table</h1>
+
+    <section>
+        <h1>Manufacturer Table</h1>
         <form action="" method="post">
-                <table border="1" style="border-collapse:collapse">
-                    <thead>
-                        <tr>
-                            <td>Manufacturer Name</td>
-                            <td>Address</td>
-                            <td>Contact</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="text" name="maNAME" id=""></td>
-                            <td><input type="text" name="adNAME" id=""></td>
-                            <td><input type="text" name="coNAME" id=""></td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="3" style="text-align:center">
-                                <button name="addManu">add</button>
-                                    <?php
-                                        if(isset($_POST["addManu"])){
-                                            echo "data added";
-                                        }else{
-                                            echo "data not added.";
-                                        }
-                                    ?>
-                                
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-
-        </form>
-
-        <section>
-            <h1>this is product</h1>
-            <form action="" method="post">
-                <table border="1" style="border-collapse:collapse">
-                    <thead>
-                        <tr>
-                            <td>Product Name</td>
-                            <td>Price</td>
-                            <td>Manufacture Name</td>
-                            <td>Manufacture delete</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="text" name="pn" id=""></td>
-                            <td><input type="text" name="pp" id=""></td>
-                            <td>
-                                <select name="manufactureadd" id="">
-                                    <?php
-                                        $product=$connect->query("select * from manufacturer");
-                                        while(list($_mid,$_mname)=$product->fetch_row()){
-                                            echo "<option value='$_mid'>$_mname</option>";
-                                        }
-                                    ?>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="manufacturedlt" id="">
-                                    <?php
-                                        $product=$connect->query("select * from manufacturer");
-                                        while(list($_mid,$_mname)=$product->fetch_row()){
-                                            echo "<option value='$_mid'>$_mname</option>";
-                                        }
-                                    ?>
-                                </select>
-                            </td>    
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="3" style="text-align:center">
-                                <button name="add">Add product</button>
-                                        <?php
-                                        if(isset($_POST["add"])){
-                                            echo "data added";
-                                        }else{
-                                            echo "data not added.";
-                                        }
-                                    ?>
-                            </td>
-                            <td>
-                                <button name="dlt">Delete</button>
-                                <?php
-                                        if(isset($_POST['dlt'])){
-                                            echo " data delete.";
-                                        }else{
-                                            echo "data not delete.";
-                                        }
-                                ?>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </form>
-        </section>
-
-        <section>
             <table>
                 <thead>
                     <tr>
-                        <td>Serial</td>
-                        <td>Product Name</td>
-                        <td>Manufacture Name</td>
-                        <td>Office Address</td>
-                        <td>Contact No.</td>
+                        <td>Manufacturer Name</td>
+                        <td>Address</td>
+                        <td>Contact</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                        $product=$connect->query("select * from tablename");
-                        while(list($_id,$_pname,$_price,$_manuname,$_address,$_contact)=$product->fetch_row()){
-                            echo "<tr>
-                                        <td>$_id</td>
-                                        <td>$_pname</td>
-                                        <td>$_price</td>
-                                        <td>$_manuname</td>
-                                        <td>$_address</td>
-                                        <td>$_contact</td>
-
-                            </tr>";
-                        }
-                    ?>
+                    <tr>
+                        <td><input type="text" name="maNAME" placeholder="Enter Manufacturer Name" required></td>
+                        <td><input type="text" name="adNAME" placeholder="Enter Address" required></td>
+                        <td><input type="text" name="coNAME" placeholder="Enter Contact" required></td>
+                    </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align:center">
+                            <button name="addManu">Add Manufacturer</button>
+                            <?php if (isset($_POST["addManu"])) { echo "<div class='message'>Data added successfully!</div>"; } ?>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
-        </section>
+        </form>
+    </section>
 
-        <section>
+    <section>
+        <h1>Product Table</h1>
+        <form action="" method="post">
             <table>
                 <thead>
                     <tr>
-                        <td>Serial</td>
                         <td>Product Name</td>
-                        <td>Manufacture Name</td>
-                        <td>Office Address</td>
-                        <td>Contact No.</td>
+                        <td>Price</td>
+                        <td>Manufacturer Name</td>
                     </tr>
                 </thead>
-
                 <tbody>
-                    <?php
-                        $product=$connect->query("select * from ");
-                        while(list($_id,$_pname,$_price,$_manuname,$_address,$_contact)=$product->fetch_row()){
-                            echo "<tr>
-                                        <td>$_id</td>
-                                        <td>$_pname</td>
-                                        <td>$_price</td>
-                                        <td>$_manuname</td>
-                                        <td>$_address</td>
-                                        <td>$_contact</td>
+                    <tr>
+                        <td><input type="text" name="pn" placeholder="Enter Product Name" required></td>
+                        <td><input type="text" name="pp" placeholder="Enter Price" required></td>
+                        <td>
+                            <select name="manufact" required>
+                                <?php
+                                    $product = $connect->query("SELECT * FROM manufacturer");
+                                    while(list($_mid, $_mname) = $product->fetch_row()) {
+                                        echo "<option value='$_mid'>$_mname</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align:center">
+                            <button name="add">Add Product</button>
+                            <?php if (isset($_POST["add"])) { echo "<div class='message'>Data added successfully!</div>"; } ?>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </section>
 
-                            </tr>";
+    <section>
+        <h1>Delete Manufacturer</h1>
+        <form action="" method="post">
+            <div class="form-container">
+                <select name="manufact" required>
+                    <?php
+                        $product = $connect->query("SELECT * FROM manufacturer");
+                        while(list($_mid, $_mname) = $product->fetch_row()) {
+                            echo "<option value='$_mid'>$_mname</option>";
                         }
                     ?>
-                </tbody>
+                </select>
+                <button name="dlt">Delete</button>
+            </div>
+            <?php if (isset($_POST['dlt'])) { echo "<div class='delete-message'>Manufacturer deleted.</div>"; } ?>
+        </form>
+    </section>
+
+    <section>
+        <h1>Product Show Table</h1>
+        <table>
+            <thead>
+                <tr>
+                    <td>Serial</td>
+                    <td>Product Name</td>
+                    <td>Price</td>
+                    <td>Manufacturer Name</td>
+                    <td>Office Address</td>
+                    <td>Contact No.</td>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $product = $connect->query("SELECT * FROM product_show");
+                    while(list($_id, $_pname, $_price, $_manuname, $_address, $_contact) = $product->fetch_row()) {
+                        echo "<tr>
+                            <td>$_id</td>
+                            <td>$_pname</td>
+                            <td>$_price</td>
+                            <td>$_manuname</td>
+                            <td>$_address</td>
+                            <td>$_contact</td>
+                        </tr>";
+                    }
+                ?>
+            </tbody>
         </table>
-        </section>
-</body>
-</html>
+    </
