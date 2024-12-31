@@ -1,5 +1,5 @@
 <?php
-        $connect=mysqli_connect("localhost","root","","");
+        $connect=mysqli_connect("localhost","root","","apex");
         if(!$connect){
             echo "not connect.";
         }else{
